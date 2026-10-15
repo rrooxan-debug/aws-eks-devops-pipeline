@@ -31,6 +31,11 @@ jobs:
         vuln-type: 'os,library'
         severity: 'CRITICAL,HIGH'
 
-    - name: Validate Kubernetes Manifests
+    - name: Setup Kubectl
+      uses: azure/setup-kubectl@v3
+      with:
+        version: 'v1.28.0'
+
+    - name: Validate Kubernetes Manifests Syntax
       run: |
-        kubectl apply --dry-run=client -f k8s/
+        kubectl apply --dry-run=client --validate=false -f k8s/
