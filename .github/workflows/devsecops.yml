@@ -31,7 +31,8 @@ jobs:
         vuln-type: 'os,library'
         severity: 'CRITICAL,HIGH'
 
-    - name: Validate Kubernetes Manifests
-      uses: yannh/kubeconform-action@v0.8.0
-      with:
-        files: 'k8s/'
+    - name: Install and Run Kubeconform
+      run: |
+        wget https://github.com/yannh/kubeconform/releases/download/v0.6.4/kubeconform-linux-amd64.tar.gz
+        tar xf kubeconform-linux-amd64.tar.gz
+        ./kubeconform -summary k8s/
